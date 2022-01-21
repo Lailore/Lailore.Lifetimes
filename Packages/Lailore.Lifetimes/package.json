@@ -1,0 +1,9 @@
+{
+  "name": "com.lailore.lifetimes",
+  "version": "1.0.0",
+  "displayName": "Lailore lifetimes",
+  "description": "Адаптация и расширения JetBrains.Lifetimes для работы с Unity3d",
+  "unity": "2020.3",
+  "dependencies": {},
+  "keywords": []
+}
