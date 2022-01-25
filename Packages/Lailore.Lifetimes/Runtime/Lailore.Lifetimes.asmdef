@@ -1,6 +1,6 @@
 {
     "name": "Lailore.Lifetimes",
-    "rootNamespace": "Lailore.Lifetimes",
+    "rootNamespace": "JetBrains.Lifetimes",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

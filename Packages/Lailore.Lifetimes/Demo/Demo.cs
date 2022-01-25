@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Lifetimes;
 using UnityEngine;
@@ -9,7 +7,10 @@ namespace Lailore.Lifetimes.Demo {
         private LifetimeDefinition _lifetimeDefinition;
 
         private void OnEnable() {
-            _lifetimeDefinition = new LifetimeDefinition();
+            var gameObjectLifetime = gameObject.GetLifetime();
+            _lifetimeDefinition = new LifetimeDefinition(gameObject.GetLifetime());
+
+            LogToConsole(gameObjectLifetime);
             StartHardWork(_lifetimeDefinition.Lifetime);
         }
 
@@ -19,9 +20,16 @@ namespace Lailore.Lifetimes.Demo {
 
         private async void StartHardWork(Lifetime lifetime) {
             lifetime.Bracket(() => { }, () => { });
-            
+
             Rotation(lifetime);
             Move(lifetime);
+        }
+
+        private async void LogToConsole(Lifetime lifetime) {
+            while (lifetime.IsAlive) {
+                Debug.Log("LogToConsole");
+                await Task.Yield();
+            }
         }
 
         private async void Rotation(Lifetime lifetime) {
@@ -41,7 +49,7 @@ namespace Lailore.Lifetimes.Demo {
                     new Vector3(Mathf.Sin(Time.time), Mathf.Cos(Time.time), 0),
                     5 * Time.deltaTime);
                 await Task.Yield();
-            }   
+            }
         }
     }
 }
